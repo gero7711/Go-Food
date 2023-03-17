@@ -9,7 +9,7 @@ const HomeContainer = () => {
   return (
     <section className='grid grid-cols-1 w-full h-fu md:grid-cols-2 gap-2' id='home'>
       <div className='py-1 flex flex-1 flex-col items-start justify-center gap-5'>
-        <p className='text-[1.5rem] flex font-semibold'>
+        <p className='text-[1.5rem] flex-wrap font-semibold'>
           YOU <span className='ml-2 font-bold text-orange-600'> CRAVE</span>, YOU{' '}
           <span className='ml-2 font-bold text-orange-600'>GRAB</span>, WE
           <span className='ml-2 font-bold text-orange-600'>DELIVER</span>
@@ -44,8 +44,8 @@ const HomeContainer = () => {
       <div className='py-2 flex-auto flex items-center relative'>
         <img src={HeroBg} className='ml-auto h-420 w-full lg:w-auto lg:h-650' alt='hero-bg' />
 
-        <div className='h-full w-full absolute top-0 left-0 flex items-center justify-center
-        lg:py-4 md:py-80 gap-4 flex-wrap lg:px-32'>
+        <div className='h-full w-full absolute top-0 left-0 flex  items-center justify-center
+        lg:py-4 md:py-40 flex-wrap gap-4  lg:px-32'>
           {heroData &&
             heroData.map((n) => (
               <div
@@ -58,7 +58,7 @@ const HomeContainer = () => {
                 <p className='text-base lg:text-xl font-semibold text-textColor mt-2 lg:mt-1'>
                   {n.name}
                 </p>
-                <p className='text-[12px] lg:text-sm font-semibold text-lighttextGray my-1 lg:my-3'>
+                <p className='text-[10px] lg:text-sm font-semibold text-lighttextGray my-1 lg:my-3'>
                   {n.decp}
                 </p>
 
