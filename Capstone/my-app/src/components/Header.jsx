@@ -111,7 +111,7 @@ const Header = () => {
                   <Link to={"/createItem"}>
                     <p
                       className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100
-                transition-all duration-100 ease-in-out text-textColor text-base"  onClick={() => setusMenu(false)}
+                transition-all duration-100 ease-in-out text-textColor text-base"
                     >
                       New Item <MdAdd />
                     </p>
@@ -164,7 +164,6 @@ const Header = () => {
                   <p
                     className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100
                 transition-all duration-100 ease-in-out text-textColor text-base"
-                onClick={() => setusMenu(false)}
                   >
                     New Item <MdAdd />
                   </p>
@@ -174,26 +173,25 @@ const Header = () => {
               <ul className="flex flex-col gap-6 px-4 py-2">
                 <li
                   className="text-base text-textColor hover:text-headingColor duration-100
-                    transition-all ease-in-out cursor-pointer hover:bg-slate-100"  onClick={() => setusMenu(false)}
+                    transition-all ease-in-out cursor-pointer hover:bg-slate-100"
                 >
                   Home
                 </li>
                 <li
                   className="text-base text-textColor hover:text-headingColor duration-100
-                    transition-all ease-in-out cursor-pointer hover:bg-slate-100"  onClick={() => setusMenu(false)}
+                    transition-all ease-in-out cursor-pointer hover:bg-slate-100"
                 >
                   Menu
                 </li>
                 <li
                   className="text-base text-textColor hover:text-headingColor duration-100
-            transition-all ease-in-out cursor-pointer hover:bg-slate-100"  onClick={() => setusMenu(false)}
+            transition-all ease-in-out cursor-pointer hover:bg-slate-100"
                 >
                   About Us
                 </li>
                 <li
                   className="text-base text-textColor hover:text-headingColor duration-100
-            transition-all ease-in-out cursor-pointer hover:bg-slate-100"  
-            onClick={() => setusMenu(false)}
+            transition-all ease-in-out cursor-pointer hover:bg-slate-100"
                 >
                   Service
                 </li>
