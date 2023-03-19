@@ -1,7 +1,7 @@
 import React from "react"
 
 const RowContainer = () => {
-    return <div>RowContainer</div>;
+    return <div className={'w-full my-12 bg-black'}></div>;
 };
 
 export default RowContainer;
