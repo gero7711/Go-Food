@@ -53,12 +53,12 @@ const Header = () => {
           <img src={Logo} className="w-20 h-20 object-cover" alt="logo" />
         </Link>
 
-        <div className="flex items-center gap-10 ml-auto">
+        <div className="flex items-center gap-8 ml-auto">
           <motion.ul
             initial={{ opacity: 0, y: 200 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 200 }}
-            className="flex items-center gap-8 ml-8"
+            className="flex items-center gap-6 ml-8"
           >
             <li
               className="text-base text-textColor hover:text-headingColor duration-100
@@ -92,7 +92,7 @@ const Header = () => {
             </div>
           </div>
 
-          <div className="relative pr-3">
+          <div className="relative">
             <motion.img
               whileTap={{ scale: 0.6 }}
               src={user ? user.photoURL : Avatar}
