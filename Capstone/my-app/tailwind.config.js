@@ -60,8 +60,11 @@ module.exports = {
         cartTotal: "#343739",
         cardOverlay: 'rgba(256, 256, 256, 0.4)',
         lighttextGray: '#ea580c',
+        card: 'rgba(256, 256, 256, 0.8)',
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
 }

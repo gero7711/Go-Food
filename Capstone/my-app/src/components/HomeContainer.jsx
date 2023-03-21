@@ -42,10 +42,10 @@ const HomeContainer = () => {
 
 
       <div className='py-2 flex-auto flex items-center relative'>
-        <img src={HeroBg} className='ml-auto h-420 w-full lg:w-auto lg:h-650' alt='hero-bg' />
+        <img src={HeroBg} className='ml-auto h-420 w-full lg:w-auto lg:h-650 p-2' alt='hero-bg' />
 
-        <div className='h-full w-full absolute top-0 left-0 flex  items-center justify-center
-        lg:py-4 md:py-40 flex-wrap gap-4  lg:px-32'>
+        <div className='h-full w-full absolute top-0 left-0 flex items-center justify-center 
+        lg:px-30 xl:px-36 py-4 gap-4 flex-wrap'>
           {heroData &&
             heroData.map((n) => (
               <div
@@ -53,7 +53,7 @@ const HomeContainer = () => {
                 className='lg:w-190 p-4 bg-cardOverlay
             backdrop-blur-md rounded-3xl flex flex-col items-center justify-center drop-shadow-lg'
               >
-                <img src={n.imageSrc} className='w-20 lg:w-40 -mt-10 lg:-mt-10' alt='dessert1' />
+                <img src={n.imageSrc} className='w-20 lg:w-40 -mt-10 lg:-mt-20' alt='dessert1' />
 
                 <p className='text-base lg:text-xl font-semibold text-textColor mt-2 lg:mt-1'>
                   {n.name}

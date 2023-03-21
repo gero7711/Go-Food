@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import HomeContainer from "./HomeContainer";
 import { motion } from "framer-motion";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import RowContainer from "./RowContainer";
 import { useStateValue } from "../context/StateProvider";
+import MenuContainer from "./MenuContainer";
+import CartContainer from "./CartContainer";
 
 const MainContainer = () => {
   const [{ foodItems }, dispatch] = useStateValue();
   const [scrollValue, setScrollValue] = useState(0);
-
+  
   useEffect(() => {}, [scrollValue]);
+  
   return (
-    <div className="w-full h-auto flex-col items-center justify-center">
+    <div className="w-full h-auto flex flex-col items-center justify-center">
       <HomeContainer />
       <section className="w-full my-6">
         <div className="w-full flex items-center justify-between">
@@ -30,8 +33,7 @@ const MainContainer = () => {
             <motion.div
               whileTap={{ scale: 0.75 }}
               className="w-8 h-8 rounded-lg 
-          bg-orange-300 hover:bg-orage-500 cursor-pointer transistion-all
-          duration-100 ease-in-out hover:shadow-lg flex items-center justify-center"
+          bg-orange-300 hover:bg-orage-500 cursor-pointer hover:shadow-lg flex items-center justify-center"
               onClick={() => setScrollValue(-200)}
             >
               <MdChevronLeft className="text-lg text-white" />
@@ -39,20 +41,22 @@ const MainContainer = () => {
             <motion.div
               whileTap={{ scale: 0.75 }}
               className="w-8 h-8 rounded-lg 
-          bg-orange-300 hover:bg-orage-500 cursor-pointer transistion-all
-          duration-100 ease-in-out hover:shadow-lg flex items-center justify-center"
+          bg-orange-300 hover:bg-orage-500 cursor-pointer hover:shadow-lg flex items-center justify-center"
               onClick={() => setScrollValue(200)}
             >
               <MdChevronRight className="text-lg text-white" />
             </motion.div>
           </div>
         </div>
-        <RowContainer
-          scrollValue={scrollValue}
-          flag={true}
-          data={foodItems?.filter((n) => n.category === "fruit")}
-        />
+        <RowContainer 
+        scrollValue = {scrollValue}
+        flag={true} 
+        data={foodItems?.filter((n) => n.category === "fruit")}/>
       </section>
+
+    <MenuContainer />
+
+    <CartContainer />
     </div>
   );
 };

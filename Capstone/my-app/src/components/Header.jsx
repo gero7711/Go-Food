@@ -50,10 +50,10 @@ const Header = () => {
       {/*desktop view*/}
       <div className="hidden md:flex w-full h-full items-center justify-between">
         <Link to={"/"} className="flex items-center gap-2">
-          <img src={Logo} className="w-20 h-20 object-cover" alt="logo" />
+          <img src={Logo} className="w-20 h-20 object-cover ml-3" alt="logo" />
         </Link>
 
-        <div className="flex items-center gap-8 ml-auto">
+        <div className="flex items-center gap-8 ml-auto px-5">
           <motion.ul
             initial={{ opacity: 0, y: 200 }}
             animate={{ opacity: 1, y: 0 }}
@@ -107,7 +107,7 @@ const Header = () => {
                 exit={{ opacity: 0, scale: 0.3 }}
                 className="w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0"
               >
-                {user && user.email === "christian.lescano07@gmail.com" && (
+                {user && user.email === "fcsabalbosajr@gmail.com" && (
                   <Link to={"/createItem"}>
                     <p
                       className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100
