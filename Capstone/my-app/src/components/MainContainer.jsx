@@ -6,13 +6,14 @@ import RowContainer from "./RowContainer";
 import { useStateValue } from "../context/StateProvider";
 import MenuContainer from "./MenuContainer";
 import CartContainer from "./CartContainer";
+import FooterContainer from "./FooterContainer";
 
 const MainContainer = () => {
-  const [{ foodItems,cartShow }, dispatch] = useStateValue();
+  const [{ foodItems, cartShow }, dispatch] = useStateValue();
   const [scrollValue, setScrollValue] = useState(0);
-  
+
   useEffect(() => {}, [scrollValue]);
-  
+
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center">
       <HomeContainer />
@@ -48,16 +49,24 @@ const MainContainer = () => {
             </motion.div>
           </div>
         </div>
-        <RowContainer 
-        scrollValue = {scrollValue}
-        flag={true} 
-        data={foodItems?.filter((n) => n.category === "fruit")}/>
+        <RowContainer
+          scrollValue={scrollValue}
+          flag={true}
+          data={foodItems?.filter((n) => n.category === "fruit")}
+        />
       </section>
 
-    <MenuContainer />
+      <MenuContainer />
 
-    {cartShow && <CartContainer />}
+      {cartShow && <CartContainer />}
+
+      <section>
+        <FooterContainer />
+      </section>
+
     </div>
+    
+
   );
 };
 
