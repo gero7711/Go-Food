@@ -15,7 +15,7 @@ const Header = () => {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
   const [isMenu, setusMenu] = useState(false);
 
   const login = async () => {
@@ -33,15 +33,23 @@ const Header = () => {
     }
   };
 
-    const logout = () => {
-      setusMenu(false)
-      localStorage.clear()
+  const logout = () => {
+    setusMenu(false);
+    localStorage.clear();
 
-      dispatch({
-        type: actionType.SET_USER,
-        user: null
-      });
-    }
+    dispatch({
+      type: actionType.SET_USER,
+      user: null,
+    });
+  };
+
+  const showCart = () => {
+    dispatch({
+      type: actionType.SET_CART_SHOW,
+      cartShow: !cartShow,
+    })
+  };
+
   return (
     <header
       className="fixed z-50 w-screen
@@ -50,27 +58,27 @@ const Header = () => {
       {/*desktop view*/}
       <div className="hidden md:flex w-full h-full items-center justify-between">
         <Link to={"/"} className="flex items-center gap-2">
-          <img src={Logo} className="w-20 h-20 object-cover" alt="logo" />
+          <img src={Logo} className="w-20 h-20 object-cover ml-3" alt="logo" />
         </Link>
 
-        <div className="flex items-center gap-10 ml-auto">
+        <div className="flex items-center gap-8 ml-auto px-5">
           <motion.ul
             initial={{ opacity: 0, y: 200 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 200 }}
-            className="flex items-center gap-8 ml-8"
+            className="flex items-center gap-6 ml-8"
           >
             <li
               className="text-base text-textColor hover:text-headingColor duration-100
                     transition-all ease-in-out cursor-pointer"
             >
-              Home
+             <Link to={"/"}>Home</Link> 
             </li>
             <li
               className="text-base text-textColor hover:text-headingColor duration-100
                     transition-all ease-in-out cursor-pointer"
             >
-              Menu
+               Menu
             </li>
             <li
               className="text-base text-textColor hover:text-headingColor duration-100
@@ -85,14 +93,19 @@ const Header = () => {
               Service
             </li>
           </motion.ul>
-          <div className="relative flex items-center justify-center">
+          <div
+            className="relative flex items-center justify-center"
+            onClick={showCart}
+          >
             <MdShoppingBasket className="text-gray-500 text-2xl cursor-pointer" />
-            <div className=" absolute -top-2 -right-2 w-4 h-4 rounded-full bg-cartNumBg flex items-center justify-center">
-              <p className="text-xs text-white font-semibold">2</p>
+            {cartItems && cartItems.length > 0 && (
+              <div className=" absolute -top-2 -right-2 w-4 h-4 rounded-full bg-cartNumBg flex items-center justify-center">
+              <p className="text-xs text-white font-semibold">{cartItems.length}</p>
             </div>
+            )}
           </div>
 
-          <div className="relative pr-3">
+          <div className="relative">
             <motion.img
               whileTap={{ scale: 0.6 }}
               src={user ? user.photoURL : Avatar}
@@ -107,11 +120,12 @@ const Header = () => {
                 exit={{ opacity: 0, scale: 0.3 }}
                 className="w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0"
               >
-                {user && user.email === "christian.lescano07@gmail.com" && (
+                {user && user.email === "fcsabalbosajr@gmail.com" && (
                   <Link to={"/createItem"}>
                     <p
                       className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100
-                transition-all duration-100 ease-in-out text-textColor text-base"  onClick={() => setusMenu(false)}
+                transition-all duration-100 ease-in-out text-textColor text-base"
+                      onClick={() => setusMenu(false)}
                     >
                       New Item <MdAdd />
                     </p>
@@ -121,7 +135,7 @@ const Header = () => {
                 <p
                   className="m-2 p-2 rounded-md shadow-md flex items-center justify-center  bg-red-500 gap-3 cursor-pointer hover:bg-red-200
               transition-all duration-100 ease-in-out text-white text-base"
-              onClick={logout}
+                  onClick={logout}
                 >
                   Logout <MdLogout />
                 </p>
@@ -133,17 +147,18 @@ const Header = () => {
 
       {/*Mobile view*/}
 
-      <div className="flex items-center justify-between md:hidden w-full h-full ">
-       
-        <div className="relative flex items-center justify-center">
-            <MdShoppingBasket className="w-8 h-8 text-gray-500 text-2xl cursor-pointer" />
-            <div className=" absolute -top-2 -right-2 w-4 h-4 rounded-full bg-cartNumBg flex items-center justify-center">
-              <p className="text-xs text-white font-semibold">2</p>
+      <div className="flex items-center justify-between md:hidden w-full h-full">
+        <div className="relative flex items-center justify-center" onClick={showCart}>
+          <MdShoppingBasket className="w-8 h-8 text-gray-500 text-2xl cursor-pointer" />
+          {cartItems && cartItems.length > 0 && (
+              <div className=" absolute -top-2 -right-2 w-4 h-4 rounded-full bg-cartNumBg flex items-center justify-center">
+              <p className="text-xs text-white font-semibold">{cartItems.length}</p>
             </div>
-         </div> 
-         <Link to={"/"} className="flex items-center justifty-left">
+            )}
+        </div>
+        <Link to={"/"} className="flex items-center justifty-left">
           <img src={Logo} className="w-20 h-20 object-cover" alt="logo" />
-        </Link>          
+        </Link>
         <div className="relative">
           <motion.img
             whileTap={{ scale: 0.6 }}
@@ -159,12 +174,12 @@ const Header = () => {
               exit={{ opacity: 0, scale: 0.3 }}
               className="w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0"
             >
-              {user && user.email === "christian.lescano07@gmail.com" && (
+              {user && user.email === "fcsabalbosajr@gmail.com" && (
                 <Link to={"/createItem"}>
                   <p
                     className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100
                 transition-all duration-100 ease-in-out text-textColor text-base"
-                onClick={() => setusMenu(false)}
+                    onClick={() => setusMenu(false)}
                   >
                     New Item <MdAdd />
                   </p>
@@ -174,26 +189,29 @@ const Header = () => {
               <ul className="flex flex-col gap-6 px-4 py-2">
                 <li
                   className="text-base text-textColor hover:text-headingColor duration-100
-                    transition-all ease-in-out cursor-pointer hover:bg-slate-100"  onClick={() => setusMenu(false)}
+                    transition-all ease-in-out cursor-pointer hover:bg-slate-100"
+                  onClick={() => setusMenu(false)}
                 >
                   Home
                 </li>
                 <li
                   className="text-base text-textColor hover:text-headingColor duration-100
-                    transition-all ease-in-out cursor-pointer hover:bg-slate-100"  onClick={() => setusMenu(false)}
+                    transition-all ease-in-out cursor-pointer hover:bg-slate-100"
+                  onClick={() => setusMenu(false)}
                 >
                   Menu
                 </li>
                 <li
                   className="text-base text-textColor hover:text-headingColor duration-100
-            transition-all ease-in-out cursor-pointer hover:bg-slate-100"  onClick={() => setusMenu(false)}
+            transition-all ease-in-out cursor-pointer hover:bg-slate-100"
+                  onClick={() => setusMenu(false)}
                 >
                   About Us
                 </li>
                 <li
                   className="text-base text-textColor hover:text-headingColor duration-100
-            transition-all ease-in-out cursor-pointer hover:bg-slate-100"  
-            onClick={() => setusMenu(false)}
+            transition-all ease-in-out cursor-pointer hover:bg-slate-100"
+                  onClick={() => setusMenu(false)}
                 >
                   Service
                 </li>
